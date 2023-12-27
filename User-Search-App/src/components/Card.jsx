@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React,  { useContext } from 'react'
 import Bitmap from '../assets/Bitmap.svg'
@@ -10,8 +11,9 @@ import Twitter2 from '../assets/twitter2.svg'
 import Url2 from '../assets/url2.svg'
 import Office2 from '../assets/office2.svg'
 import { ThemeContext } from '../context/ThemeContextProvider.jsx'
+import {format,parseISO} from 'date-fns'
 
-const Card = () => {
+const Card = ({githubUser}) => {
   const {theme} = useContext(ThemeContext)
 
   return (
@@ -20,20 +22,21 @@ const Card = () => {
       {/* SECTION A */}
       <div className='flex gap-5 w-full' >
         <span className='w-[20%]'>
-          <img src={Bitmap} alt='bitmap' className='rounded-full'/>
+          {githubUser?.avatar_url ? <img src={githubUser?.avatar_url} alt='bitmap' className='rounded-full'/> : <img src={Bitmap} alt='bitmap' className='rounded-full'/>}
+        
         </span>
         <div className='w-full flex gap-2 justify-between items-start'>
           <div className='flex flex-col gap-1'>
-            <h1 className='text-[24px] text-primaryBlack font-bold font-spaceMono m-0 p-0  dark:text-white'>The Octocat</h1>
-            <h4 className='text-[14px] text-primaryBlue font-spaceMono m-0 p-0'>@octocat</h4>
+            <h1 className='text-[24px] text-primaryBlack font-bold font-spaceMono m-0 p-0  dark:text-white'> {githubUser?.login=== null ? 'The Octocat': githubUser?.login}</h1>
+            <h4 className='text-[14px] text-primaryBlue font-spaceMono m-0 p-0'>@{githubUser?.login}</h4>
             </div>
-            <h4 className='text-[13px] text-gray-200 font-spaceMono mt-2 dark:text-white'>Joined 25 Jan 2011</h4>
+            {/* <h4 className='text-[13px] text-gray-200 font-spaceMono mt-2 dark:text-white'> Joined {format(parseISO (githubUser?.created_at), 'd MMM yyyy')}</h4> */}
         </div>
-      </div>
+      </div>  
 
       {/*SECTION B*/}
       <div className='justify-end flex'>
-        <p className='text-gray-100 text-[13px] font-spaceMono font-normal w-[80%] p-0 m-0  dark:text-white'>This profile has no bio</p>
+        <p className='text-gray-100 text-[13px] font-spaceMono font-normal w-[80%] p-0 m-0  dark:text-white'>{githubUser?.bio === null? 'This profile has no bio.': githubUser?.bio}</p>
       </div>
 
       {/* SECTION C */}
@@ -43,15 +46,15 @@ const Card = () => {
         <div className='flex justify-between bg-gray-light p-5 rounded-lg dark:bg-tetiaryBlack'>
           <div className='flex flex-col justify-center items-center'>
             <h4 className='text-[13px] text-gray-200  dark:text-white'>Repo</h4>
-            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack  dark:text-white'>8</p>
+            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack  dark:text-white'>{githubUser?.public_repos === null ? '0' : githubUser?.public_repos }</p>
           </div>
           <div className='flex flex-col justify-center items-center'>
             <h4 className='text-[13px] text-gray-200  dark:text-white'>Following</h4>
-            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack  dark:text-white'>3908</p>
+            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack  dark:text-white'>{githubUser?.following === null ? '0': githubUser?.following }</p>
           </div>
           <div className='flex flex-col justify-center items-center'>
             <h4 className='text-[13px] text-gray-200  dark:text-white'>Followers</h4>
-            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack dark:text-white'>408</p>
+            <p className='font-bold font-spaceMono text-[15px] text-primaryBlack dark:text-white'>{githubUser?.followers === null ? '0': githubUser?.followers}</p>
           </div>
         </div>
 
