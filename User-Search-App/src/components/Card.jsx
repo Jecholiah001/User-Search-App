@@ -30,7 +30,9 @@ const Card = ({githubUser}) => {
             <h1 className='text-[24px] text-primaryBlack font-bold font-spaceMono m-0 p-0  dark:text-white'> {githubUser?.login=== null ? 'The Octocat': githubUser?.login}</h1>
             <h4 className='text-[14px] text-primaryBlue font-spaceMono m-0 p-0'>@{githubUser?.login}</h4>
             </div>
-            {/* <h4 className='text-[13px] text-gray-200 font-spaceMono mt-2 dark:text-white'> Joined {format(parseISO (githubUser?.created_at), 'd MMM yyyy')}</h4> */}
+            <h4 className='text-[13px] text-gray-200 font-spaceMono mt-2 dark:text-white'>
+            {/* Joined {format(parseISO (githubUser?.created_at), 'd MMM yyyy')} */}
+            </h4>
         </div>
       </div>  
 

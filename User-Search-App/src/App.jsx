@@ -5,7 +5,7 @@ import './App.css'
 import Card from './components/Card'
 import Header from './components/Header'
 import Search from './components/search'
-import axios from "axios"
+import axios from 'axios'
 
 function App() {
   const [githubUser, setGithubUser] = useState(null)
@@ -25,6 +25,7 @@ function App() {
       console.log(data)
       setLoading(false)
       setGithubUser(data)
+
     } catch (error) {
         console.log(error)
         setError('No Results',error)
